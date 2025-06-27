@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schrödinger Equation in a Fractal Potential</title>
+    <style>
+        :root {
+            --background-color: #000000;
+            --text-color: #e0e0e0;
+            --primary-color: #00f6ff;
+            --secondary-color: #ff00ff;
+            --panel-bg-color: rgba(10, 15, 25, 0.85);
+            --font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #simulationCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .controls-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            background-color: var(--panel-bg-color);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 246, 255, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+            z-index: 10;
+        }
+        
+        .controls-panel h1 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px var(--primary-color);
+        }
+
+        .control-group {
+            margin-bottom: 18px;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .control-group span {
+            float: right;
+            color: var(--primary-color);
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 246, 255, 0.2);
+            outline: none;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 16px; height: 16px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 2px solid var(--background-color);
+            box-shadow: 0 0 5px var(--primary-color);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 16px; height: 16px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 2px solid var(--background-color);
+            box-shadow: 0 0 5px var(--primary-color);
+        }
+
+        .button {
+            width: 100%;
+            padding: 12px;
+            font-family: var(--font-family);
+            font-size: 1rem;
+            font-weight: bold;
+            background: transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 5px;
+        }
+
+        #toggleViewButton {
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+        #toggleViewButton:hover {
+            background: var(--primary-color);
+            color: var(--background-color);
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        #resetButton {
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+        }
+
+        #resetButton:hover {
+            background: var(--secondary-color);
+            color: var(--background-color);
+            box-shadow: 0 0 15px var(--secondary-color);
+        }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="simulationCanvas"></canvas>
+    
+    <div class="controls-panel">
+        <h1>Schrödinger Simulation</h1>
+        
+        <div class="control-group">
+            <label for="potentialHeight">Potential Barrier Height <span id="potentialHeightValue">5.0</span></label>
+            <input type="range" id="potentialHeight" min="0" max="20" step="0.1" value="5.0">
+        </div>
+        
+        <div class="control-group">
+            <label for="fractalComplexity">Fractal Complexity <span id="fractalComplexityValue">5</span></label>
+            <input type="range" id="fractalComplexity" min="1" max="8" step="1" value="5">
+        </div>
+        
+        <div class="control-group">
+            <label for="packetWidth">Initial Wave Packet Width <span id="packetWidthValue">20</span></label>
+            <input type="range" id="packetWidth" min="5" max="50" step="1" value="20">
+        </div>
+
+        <button id="toggleViewButton" class="button">View: Wavefunction</button>
+        <button id="resetButton" class="button">Restart Simulation</button>
+    </div>
+    
+    <script src="simulation.js"></script>
+
+</body>
+</html>
